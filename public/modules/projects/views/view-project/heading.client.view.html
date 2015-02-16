@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-sm-4">
+		Image
+	</div>
+	<div class="col-sm-8">
+		<h2>{{project.name}} ({{project.type}})</h2>
+        <button type="button" class="btn btn-primary" data-ng-if="showBecomeMemberBtn()" data-ng-click="becomeMember()">Become member</button>
+		<p class="textarea-show" data-ng-bind-html="project.description"></p>
+	</div>
+</div>

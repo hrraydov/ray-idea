@@ -1,0 +1,49 @@
+<section class="row" data-ng-controller="AuthenticationController">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<div class="well">
+				<div class="row">
+					<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
+					<div class="col-md-12 text-center">
+						<a href="/auth/facebook" class="btn btn-primary">Facebook</a>						
+						<a href="/auth/twitter" class="btn btn-primary">Twitter</a>						
+						<a href="/auth/google" class="btn btn-primary">Google</a>
+					</div>
+					<h3 class="col-md-12 text-center">Or with your account</h3>
+					<div class="col-sm-8 col-sm-offset-2">
+						<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" novalidate>
+							<fieldset>							
+								<div data-ng-show="error" class="alert alert-danger">
+									<strong data-ng-bind="error"></strong>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="glyphicon glyphicon-user"></i>
+										</span>
+										<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+									</div>									
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="glyphicon glyphicon-asterisk"></i>
+										</span>
+										<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+									</div>									
+								</div>
+								<div class="text-center form-group">
+									<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+								</div>
+								<div class="forgot-password text-center form-group">
+									<a href="/#!/password/forgot">Forgot your password?</a> or 									
+									<a href="/#!/signup">Sign up</a>
+								</div>
+							</fieldset>
+						</form>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>	
+</section>

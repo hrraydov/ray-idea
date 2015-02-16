@@ -1,0 +1,54 @@
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+.browsehappy.jumbotron.hide,
+body.ng-cloak
+{
+	display: block;
+}
+
+.input-group-addon{
+	background-color: #DF691A;
+}
+
+.margin-bottom-nav{
+	margin-bottom: 10px;
+}
+
+.nav > li > a:hover{
+	background-color: #DF691A;
+}
+
+.right-border{
+	border-right: 1px solid #DF691A;
+}
+
+.bottom-border{
+	border-bottom: 1px solid #DF691A;
+}
+
+.textarea-show{
+	white-space: pre;
+}
+
+.navbar{
+	font-size: 14px;
+	min-height: 42px;
+}
+
+.navbar-brand{
+	font-size: 28px;
+}
+

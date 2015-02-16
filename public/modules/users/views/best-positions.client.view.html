@@ -1,0 +1,18 @@
+<section data-ng-controller="BestPositionsController" data-ng-init="loadPositions()">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<div class="well">
+				<ul class="text-center list-unstyled">
+					<li data-ng-repeat="position in positions">
+						<h3>
+							{{position.name}}
+						</h3>
+						<h4>
+							<a href="/#!/projects/{{position.project.urlName}}">{{position.project.name}}</a>
+						</h4>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

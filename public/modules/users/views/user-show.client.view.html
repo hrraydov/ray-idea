@@ -1,0 +1,134 @@
+<section data-ng-controller="UserShowController">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-sm-4 text-center">
+					    	<img class="img-circle" width="150" height="150" data-ng-src="{{user.avatar.url}}" alt="Avatar">
+						</div>
+						<div class="col-sm-8">
+							<h3>{{user.displayName}}</h3>
+							<p class="textarea-show" data-ng-bind-html="user.about"></p>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<ul class="col-md-12 nav nav-pills nav-justified margin-bottom-nav">							
+						<li data-ng-class="{active: active == 'personal'}">
+							<a href="javascript:;" data-ng-click="activate('personal')">Personal</a>
+						</li>							
+						<li data-ng-class="{active: active == 'projects'}">
+							<a href="javascript:;" data-ng-click="activate('projects')">Projects</a>
+						</li>							
+						<li data-ng-class="{active: active == 'skills'}">
+							<a href="javascript:;" data-ng-click="activate('skills')">Skills</a>
+						</li>
+						<li data-ng-class="{active: active == 'education'}">
+							<a href="javascript:;" data-ng-click="activate('education')">Education</a>
+						</li>
+						<li data-ng-class="{active: active == 'workExperience'}">
+							<a href="javascript:;" data-ng-click="activate('workExperience')">Work Experience</a>
+						</li>
+					</ul>
+					<div data-ng-show="active == 'personal'">
+						<div class="row">
+							<div class="col-sm-6 text-right right-border">
+								<h3>First name</h3>
+							</div>
+							<div class="col-sm-6">
+								<h3>{{user.firstName}}</h3>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6 text-right right-border">
+								<h3>Last name</h3>
+							</div>
+							<div class="col-sm-6">
+								<h3>{{user.lastName}}</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 text-right right-border">
+								<h3>Gender</h3>
+							</div>
+							<div class="col-sm-6">
+								<h3>{{user.gender}}</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 text-right right-border">
+								<h3>Birthdate</h3>
+							</div>
+							<div class="col-sm-6">
+								<h3>{{user.birthdate}}</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 text-right right-border">
+								<h3>Website</h3>
+							</div>
+							<div class="col-sm-6">
+								<h3><a href="{{user.website}}">{{user.website}}</a></h3>
+							</div>
+						</div>
+					</div>
+					<div data-ng-show="active == 'education'">
+						<ul class="list-unstyled">
+							<li class="bottom-border" data-ng-repeat="education in user.education">
+								<div>
+									<h3>{{education.school}}</h3>
+									<span>{{education.from}}</span>
+									-
+									<span>{{education.to}}</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div data-ng-show="active == 'workExperience'">
+						<ul class="list-unstyled">
+							<li class="bottom-border" data-ng-repeat="experience in user.experience">
+								<div>
+									<h3>{{experience.company}}</h3>
+									<span>{{experience.from}}</span>
+									-
+									<span>{{experience.to}}</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div data-ng-show="active == 'skills'">
+						<ul class="list-unstyled row">
+							<li class="bottom-border col-md-3" data-ng-repeat="skill in user.skills">
+								<div style="height: 100px;">
+									<h3>{{skill.name}}</h3>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div data-ng-show="active == 'projects'">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2 class="bottom-border">Owner of</h2>
+								<ul class="list-unstyled">
+									<li data-ng-repeat="project in user.ownerOf">
+										<h3><a href="/#!/projects/{{project.urlName}}">{{project.name}}</a></h3>
+									</li>
+								</ul>
+							</div>
+							<div class="col-sm-6">
+								<h2 class="bottom-border">Member of</h2>
+								<ul class="list-unstyled">
+									<li data-ng-repeat="project in user.memberOf">
+										<h3><a href="/#!/projects/{{project.urlName}}">{{project.name}}</a></h3>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

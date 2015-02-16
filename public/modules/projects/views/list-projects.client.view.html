@@ -1,0 +1,100 @@
+<section data-ng-controller="ProjectsController" data-ng-init="loadProjects()">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="well">
+                <div>
+                    <a href="javascript:;" data-toggle="modal" data-target="#create-project-modal">Create new project</a>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2 class="bottom-border">Owner of</h2>
+                        <ul class="list-unstyled">
+                            <li data-ng-repeat="project in projects.ownerOf">
+                                <div>
+                                    <a href="/#!/projects/{{project.urlName}}">
+                                        <h3>
+                                            {{project.name}}
+                                        </h3>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-ng-click="remove(project)">Remove</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="bottom-border">Member of</h2>
+                        <ul class="list-unstyled">
+                            <li data-ng-repeat="project in projects.memberOf">
+                                <div>
+                                    <a href="/#!/projects/{{project.urlName}}">
+                                        <h3>
+                                            {{project.name}}
+                                        </h3>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="bottom-border">Candidate for</h2>
+                        <ul class="list-unstyled">
+                            <li data-ng-repeat="project in projects.candidateFor">
+                                <div>
+                                    <a href="/#!/projects/{{project.urlName}}">
+                                        <h3>
+                                            {{project.name}}
+                                        </h3>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-ng-click="cancelCandidature(project)">Cancel</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tab-index="-1" id="create-project-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Create project</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" novalidate>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="text" data-ng-model="newProject.name" id="name" class="form-control" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="description">Description</label>
+                                <div class="controls">
+                                    <textarea type="text" data-ng-model="newProject.description" id="description" class="form-control" placeholder="Description" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label>Type</label>
+                                    <select class="form-control" data-ng-model="newProject.type">
+                                        <option selected="selected" value="public">Public</option>
+                                        <option value="private">Private</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div data-ng-show="error" class="text-danger">
+                                <strong data-ng-bind="error"></strong>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="create()" data-dismiss="modal">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

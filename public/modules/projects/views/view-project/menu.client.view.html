@@ -1,0 +1,11 @@
+<ul data-ng-show="isOwner" class="col-md-12 nav nav-pills nav-justified margin-bottom-nav">			
+	<li data-ng-class="{active: active == 'info'}">
+		<a href="javascript:;" data-ng-click="activate('info')" data-toggle="modal" data-target="#info-modal">Information</a>
+	</li>
+    <li data-ng-class="{active: active == 'candidates'}">
+        <a href="javascript:;" data-ng-click="activate('candidates')" data-toggle="modal" data-target="#candidates-modal">Candidates</a>
+    </li>
+    <li data-ng-class="{active: active == 'members'}">
+        <a href="javascript:;" data-ng-click="activate('members')" data-toggle="modal" data-target="#members-modal">Members</a>
+    </li>
+</ul>

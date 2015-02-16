@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"></button>
+            <h4 class="modal-title">Resources</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+            	<div class="col-sm-6">
+            		<h3 class="bottom-border">Images</h3>
+            		<form class="form-inline" data-ng-submit="uploadImage()" novalidate>
+            			<div class="form-group">             
+                            <input type="file" data-nv-file-select uploader="uploader" name="image"/>
+            			</div>
+                        <div class="form-group">             
+                            <input class="btn btn-primary" type="submit" value="upload"/>
+                        </div>
+            		</form>
+            		<ul class="list-unstyled">
+            			<li data-ng-repeat="image in project.images">
+                            <h3><a href="/#!/user/{{image.by.username}}">{{image.by.displayName}}</a></h3>
+            				<a href="{{image.url}}"><img width="150" height="150" data-ng-src="{{image.url}}" /></a>
+                            <button class="btn btn-sm btn-danger" data-ng-if="isOwner || image.by._id === authentication.user._id" data-ng-click="removeImage(image)">Remove</button>
+            			</li>
+            		</ul>
+            	</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"></button>
+            <h4 class="modal-title">Positions</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="list-group">
+                        <a href="javascript:;" class="list-group-item" data-ng-click="addEmptyPosition()">Add new position</a>
+                        <a href="javascript:;" class="list-group-item" data-ng-class="{active: activePosition._id === position._id}" data-ng-repeat="position in project.positions" data-ng-click="selectPosition(position)">{{position.name}}</a>
+                    </div>
+                </div>
+                <div class="col-sm-8" data-ng-show="activePosition">
+                    <div class="row">
+                        <form class="form-inline col-sm-6" novalidate data-ng-submit="updatePosition()">
+                            <div class="form-group text-center">
+                                <input type="text" class="form-control" data-ng-model="activePosition.name" name="name" placeholder="Name" />
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </form>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled" data-ng-init="goodUsers()">
+                                <li data-ng-repeat="user in goodUsers | limitTo: 5">
+                                    <a href="/#!/user/{{user.username}}">{{user.displayName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3 class="bottom-border">Required skills</h3>
+                    <div class="row">
+                        <div class="col-sm-4" data-ng-class="{'right-border': $index % 3 !== 2}" data-ng-repeat="skill in activePosition.requiredSkills">
+                            <h3>{{skill.name}}</h3>
+                            <button type="button" class="btn btn-sm btn-danger" data-ng-click="removeRequiredSkill(skill)">Remove</button>
+                        </div>
+                        <div class="col-sm-4">                      
+                            <form style="padding-top: 5px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" data-ng-model="newRequiredSkill.name" placeholder="Name" />
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" class="btn btn-primary" data-ng-click="addRequiredSkill()">Add skill</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <h3 class="bottom-border">Plus skills</h3>
+                    <div class="row">
+                        <div class="col-sm-4" data-ng-class="{'right-border': $index % 3 !== 2}" data-ng-repeat="skill in activePosition.plusSkills">
+                            <h3>{{skill.name}}</h3>
+                            <button type="button" class="btn btn-sm btn-danger" data-ng-click="removePlusSkill(skill)">Remove</button>
+                        </div>
+                        <div class="col-sm-4">                      
+                            <form style="padding-top: 5px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" data-ng-model="newPlusSkill.name" placeholder="Name" />
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" class="btn btn-primary" data-ng-click="addPlusSkill()">Add skill</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

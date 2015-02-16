@@ -1,0 +1,132 @@
+<section data-ng-controller="ProjectsController" data-ng-init="loadProject()">
+	<div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+            	<div class="panel-heading">
+            		<div data-ng-include="'/modules/projects/views/view-project/heading.client.view.html'"></div>
+            	</div>
+            	<div class="panel-body">
+            		<ul data-ng-show="isOwner" class="col-md-12 nav nav-pills nav-justified margin-bottom-nav">			
+						<li data-ng-class="{active: active == 'info'}">
+							<a href="javascript:;" data-ng-click="activate('info')" data-toggle="modal" data-target="#info-modal">Information</a>
+						</li>
+                        <li data-ng-class="{active: active == 'candidates'}">
+                            <a href="javascript:;" data-ng-click="activate('candidates')" data-toggle="modal" data-target="#candidates-modal">Candidates</a>
+                        </li>
+                        <li data-ng-class="{active: active == 'members'}">
+                            <a href="javascript:;" data-ng-click="activate('members')" data-toggle="modal" data-target="#members-modal">Members</a>
+                        </li>
+                        <li data-ng-class="{active: active == 'positions'}">
+                            <a href="javascript:;" data-ng-click="activate('positions')" data-toggle="modal" data-target="#positions-modal">Positions</a>
+                        </li>
+                        <li data-ng-class="{active: active == 'resources'}">
+                            <a href="javascript:;" data-ng-click="activate('resources')" data-toggle="modal" data-target="#resources-modal">Resources</a>
+                        </li>
+					</ul>
+                    <div data-ng-if="project.type === 'public' || isOwner || isMember" class="col-sm-4">
+                        <h2 class="bottom-border">Members</h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h3><a href="/#!/user/{{project.user.username}}">{{project.user.displayName}}</a> (Owner)</h3>
+                            </li>
+                            <li data-ng-repeat="member in project.members">
+                                <h3><a href="/#!/user/{{member.username}}">{{member.displayName}}</a></h3>
+                            </li>
+                        </ul>
+                    </div>
+            	</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tab-index="-1" id="info-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Edit information</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" novalidate>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="control-label" for="name">Name</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="project.name" id="name" class="form-control" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="description">Description</label>
+                                <div class="controls">
+                                    <textarea type="text" data-ng-model="project.description" id="description" class="form-control" placeholder="Description" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label>Type</label>
+                                    <select class="form-control" data-ng-model="project.type">
+                                        <option selected value="public">Public</option>
+                                        <option value="private">Private</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div data-ng-show="error" class="text-danger">
+                                <strong data-ng-bind="error"></strong>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="update()" data-dismiss="modal">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tab-index="-1" id="candidates-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Candidates</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-unstyled">
+                        <li data-ng-repeat="candidate in project.candidates">
+                           <h3>{{candidate.username}}</h3>
+                           <button type="button" class="btn btn-primary" data-ng-click="acceptCandidature(candidate)">Accept</button>
+                           <button type="button" class="btn btn-danger" data-ng-click="declineCandidature(candidate)">Decline</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tab-index="-1" id="members-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Members</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-unstyled">
+                        <li data-ng-repeat="member in project.members">
+                           <h3>{{member.username}}</h3>
+                           <button type="button" class="btn btn-sm btn-danger" data-ng-click="removeMember(member)">Remove</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tab-index="-1" id="positions-modal" data-ng-include="'/modules/projects/views/view-project/positions.client.view.html'">        
+    </div>
+    <div class="modal fade" tab-index="-1" id="resources-modal" data-ng-include="'/modules/projects/views/view-project/resources.client.view.html'">        
+    </div>
+</section>
